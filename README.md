@@ -1,5 +1,7 @@
 # transitime-db
 
+http://transitime-host.cloudapp.net/api/v1/key/f18a8240/agency/cap-metro/command/predictions?rs=803%7C4830
+
 Things to make transitime go:
 
 - Ubuntu
