@@ -42,17 +42,17 @@ EXPOSE 8080
 WORKDIR /
 
 RUN \
-        git clone https://github.com/walkeriniraq/transittime-core.git && \
-        cd transittime-core && \
-        git checkout cap-metro && \
+        git clone https://github.com/scrudden/core.git core && \
+        cd core && \
+        git checkout kalman_predictions && \
         mvn install -DskipTests && \
         cd / && \
         mkdir /usr/local/transitime && \
         mkdir /usr/local/transitime/db && \
-        mv /transittime-core/transitime/target/transitime.jar /usr/local/transitime && \
-        mv /transittime-core/transitimeApi/target/api.war /usr/local/tomcat/webapps && \
-        mv /transittime-core/transitime/target/classes/ddl_postgres*.sql /usr/local/transitime/db && \
-        rm -rf /transitime-core && \
+        mv /core/transitime/target/transitime.jar /usr/local/transitime && \
+        mv /core/transitimeApi/target/api.war /usr/local/tomcat/webapps && \
+        mv /core/transitime/target/classes/ddl_postgres*.sql /usr/local/transitime/db && \
+        rm -rf /core && \
         rm -rf ~/.m2/repository
 
 ADD bin/create_tables.sh create_tables.sh
