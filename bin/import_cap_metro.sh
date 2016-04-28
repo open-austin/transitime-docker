@@ -12,7 +12,7 @@ java \
 	-Dhibernate.connection.password=$PGPASSWORD \
 	-cp /usr/local/transitime/transitime.jar \
 	org.transitime.applications.GtfsFileProcessor \
-	-gtfsUrl "https://data.texas.gov/download/r4v4-vz24/application/zip"
+	-gtfsUrl "http://www.transportforireland.ie/transitData/google_transit_irishrail.zip"
 
 psql \
 	-h "$POSTGRES_PORT_5432_TCP_ADDR" \

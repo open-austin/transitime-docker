@@ -27,11 +27,11 @@ RUN gpg --keyserver pool.sks-keyservers.net --recv-keys \
 
 ENV TOMCAT_MAJOR 8
 ENV TOMCAT_VERSION 8.0.26
-ENV TOMCAT_TGZ_URL https://www.apache.org/dist/tomcat/tomcat-$TOMCAT_MAJOR/v$TOMCAT_VERSION/bin/apache-tomcat-$TOMCAT_VERSION.tar.gz
-
+ENV TOMCAT_TGZ_URL http://ftp.heanet.ie/mirrors/www.apache.org/dist/tomcat/tomcat-8/v8.5.0/bin/apache-tomcat-8.5.0.tar.gz
+ENV TOMCAT_TGZ_URL_ASC https://www.apache.org/dist/tomcat/tomcat-8/v8.5.0/bin/apache-tomcat-8.5.0.tar.gz.asc
 RUN set -x \
 	&& curl -fSL "$TOMCAT_TGZ_URL" -o tomcat.tar.gz \
-	&& curl -fSL "$TOMCAT_TGZ_URL.asc" -o tomcat.tar.gz.asc \
+	&& curl -fSL "$TOMCAT_TGZ_URL_ASC" -o tomcat.tar.gz.asc \
 	&& gpg --verify tomcat.tar.gz.asc \
 	&& tar -xvf tomcat.tar.gz --strip-components=1 \
 	&& rm bin/*.bat \
@@ -41,25 +41,31 @@ EXPOSE 8080
 
 WORKDIR /
 
-RUN \
-        git clone https://github.com/walkeriniraq/transittime-core.git && \
-        cd transittime-core && \
-        git checkout cap-metro && \
-        mvn install -DskipTests && \
-        cd / && \
-        mkdir /usr/local/transitime && \
-        mkdir /usr/local/transitime/db && \
-        mv /transittime-core/transitime/target/transitime.jar /usr/local/transitime && \
-        mv /transittime-core/transitimeApi/target/api.war /usr/local/tomcat/webapps && \
-        mv /transittime-core/transitime/target/classes/ddl_postgres*.sql /usr/local/transitime/db && \
-        rm -rf /transitime-core && \
-        rm -rf ~/.m2/repository
+RUN git clone https://github.com/scrudden/core.git /transitime-core
+WORKDIR /transitime-core/
+RUN mvn install -DskipTests
+WORKDIR /
+RUN mkdir /usr/local/transitime
+RUN mkdir /usr/local/transitime/db
+RUN ls /transitime-core/transitime/target/
+RUN mv /transitime-core/transitime/target/Core.jar /usr/local/transitime/transitime.jar
+RUN ls /transitime-core/transitimeApi/target/
+RUN mv /transitime-core/transitimeApi/target/api.war /usr/local/tomcat/webapps
+RUN ls /transitime-core/transitime/target/classes/
+RUN mv /transitime-core/transitime/target/classes/ddl_postgres*.sql /usr/local/transitime/db
+RUN rm -rf /transitime-core
+RUN rm -rf ~/.m2/repository
 
 ADD bin/create_tables.sh create_tables.sh
 ADD bin/create_api_key.sh create_api_key.sh
+
 ADD bin/import_cap_metro.sh import_cap_metro.sh
 ADD bin/connect_to_db.sh connect_to_db.sh
 ADD bin/start_transitime.sh start_transitime.sh
+RUN \
+	sed -i 's/\r//' *.sh &&\
+ 	chmod 777 *.sh
+
 ADD config/postgres_hibernate.cfg.xml /usr/local/transitime/hibernate.cfg.xml
 ADD config/transitime.properties /usr/local/transitime/transitime.properties
 

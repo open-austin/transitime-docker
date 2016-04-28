@@ -7,7 +7,7 @@ java \
     -Dhibernate.connection.url=jdbc:postgresql://$POSTGRES_PORT_5432_TCP_ADDR:$POSTGRES_PORT_5432_TCP_PORT/cap-metro \
     -Dhibernate.connection.username=postgres \
     -Dhibernate.connection.password=$PGPASSWORD \
-    -Dtransitime.avl.gtfsRealtimeFeedURI="https://data.texas.gov/download/i5qp-g5fd/application/octet-stream" \
+    -Dtransitime.avl.gtfsRealtimeFeedURI="http://irishrailrealtime-gtfsnode.rhcloud.com/vehiclePositions" \
     -Dtransitime.modules.optionalModulesList=org.transitime.avl.GtfsRealtimeModule \
     -Dtransitime.core.agencyId=cap-metro \
     -cp /usr/local/transitime/transitime.jar \
