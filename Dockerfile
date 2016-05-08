@@ -41,6 +41,7 @@ EXPOSE 8080
 
 WORKDIR /
 
+
 # RUN git clone https://github.com/scrudden/core.git /transitime-core
 RUN git clone https://github.com/Transitime/core.git /transitime-core
 WORKDIR /transitime-core/
@@ -63,6 +64,7 @@ RUN mv /transitime-core/transitimeWebapp/target/web.war /usr/local/tomcat/webapp
 RUN mv /transitime-core/transitime/target/classes/ddl_postgres*.sql /usr/local/transitime/db
 RUN rm -rf /transitime-core
 RUN rm -rf ~/.m2/repository
+
 
 ADD bin/create_tables.sh create_tables.sh
 ADD bin/create_api_key.sh create_api_key.sh
