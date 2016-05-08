@@ -41,33 +41,43 @@ EXPOSE 8080
 
 WORKDIR /
 
-RUN git clone https://github.com/scrudden/core.git /transitime-core
+# RUN git clone https://github.com/scrudden/core.git /transitime-core
+RUN git clone https://github.com/Transitime/core.git /transitime-core
 WORKDIR /transitime-core/
 RUN mvn install -DskipTests
 WORKDIR /
 RUN mkdir /usr/local/transitime
 RUN mkdir /usr/local/transitime/db
-RUN ls /transitime-core/transitime/target/
+RUN mkdir /usr/local/transitime/config
+RUN mkdir /usr/local/transitimeTomcatConfig/
+
+# Deploy core. The work horse of the system
 RUN mv /transitime-core/transitime/target/Core.jar /usr/local/transitime/transitime.jar
-RUN ls /transitime-core/transitimeApi/target/
+
+# Deploy API which talks to core using RMI calls
 RUN mv /transitime-core/transitimeApi/target/api.war /usr/local/tomcat/webapps
-RUN ls /transitime-core/transitime/target/classes/
+
+# Deploy webapp which is a UI based on the API
+RUN mv /transitime-core/transitimeWebapp/target/web.war /usr/local/tomcat/webapps
+
 RUN mv /transitime-core/transitime/target/classes/ddl_postgres*.sql /usr/local/transitime/db
 RUN rm -rf /transitime-core
 RUN rm -rf ~/.m2/repository
 
 ADD bin/create_tables.sh create_tables.sh
 ADD bin/create_api_key.sh create_api_key.sh
+# ADD bin/check_db_up.sh check_db_up.sh
 
-ADD bin/import_cap_metro.sh import_cap_metro.sh
+ADD bin/import_gtfs.sh import_gtfs.sh
 ADD bin/connect_to_db.sh connect_to_db.sh
 ADD bin/start_transitime.sh start_transitime.sh
 RUN \
 	sed -i 's/\r//' *.sh &&\
  	chmod 777 *.sh
 
-ADD config/postgres_hibernate.cfg.xml /usr/local/transitime/hibernate.cfg.xml
-ADD config/transitime.properties /usr/local/transitime/transitime.properties
-
+ADD config/postgres_hibernate.cfg.xml /usr/local/transitime/config/hibernate.cfg.xml
+ADD config/transitime.properties /usr/local/transitime/config/transitime.properties
+ADD config/transitime.properties /usr/local/transitimeTomcatConfig/transitime.properties
+ADD config/transiTimeConfig.xml /usr/local/transitime/config/transiTimeConfig.xml
 CMD ["/start_transitime.sh"]
 
