@@ -39,6 +39,11 @@ RUN set -x \
 
 EXPOSE 8080
 
+# Get postgres jdbc driver and add to tomcat.
+WORKDIR /usr/local/tomcat/lib
+
+RUN wget https://jdbc.postgresql.org/download/postgresql-9.4.1208.jre6.jar
+
 WORKDIR /
 
 
@@ -68,11 +73,14 @@ RUN rm -rf ~/.m2/repository
 
 ADD bin/create_tables.sh create_tables.sh
 ADD bin/create_api_key.sh create_api_key.sh
-# ADD bin/check_db_up.sh check_db_up.sh
+ADD bin/add_webagency.sh add_webagency.sh
+ADD bin/check_db_up.sh check_db_up.sh
 
 ADD bin/import_gtfs.sh import_gtfs.sh
 ADD bin/connect_to_db.sh connect_to_db.sh
+
 ADD bin/start_transitime.sh start_transitime.sh
+
 RUN \
 	sed -i 's/\r//' *.sh &&\
  	chmod 777 *.sh
