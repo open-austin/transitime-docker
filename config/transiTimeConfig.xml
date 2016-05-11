@@ -17,11 +17,21 @@
     <avl>
         <!-- URL for GTFS realtime vechicle location stream -->
         <gtfsRealtimeFeedURI>http://irishrailrealtime-gtfsnode.rhcloud.com/vehiclePositions</gtfsRealtimeFeedURI> 
-	<url>http://irishrailrealtime-gtfsnode.rhcloud.com/vehiclePositions</url>       
+		<url>http://irishrailrealtime-gtfsnode.rhcloud.com/vehiclePositions</url>       
         <minLongitude>-10.725</minLongitude>
         <maxLongitude>-5.35</maxLongitude>             
         <minLatitude>51.35</minLatitude>
         <maxLatitude>55.45</maxLatitude>                
         <feedPollingRateSecs>60</feedPollingRateSecs>
     </avl>   
+    <db>        
+        <dbName>AGENCYNAME</dbName>
+        <dbHost>POSTGRES_PORT_5432_TCP_ADDR:POSTGRES_PORT_5432_TCP_PORT</dbHost>
+        <dbType>postgresql</dbType>
+        <dbUserName>postgres</dbUserName>
+        <dbPassword>PGPASSWORD</dbPassword>
+    </db>     
+    <hibernate>
+        <configFile>/usr/local/transitime/config/hibernate.cfg.xml</configFile>        
+    </hibernate>
 </transitime>

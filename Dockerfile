@@ -3,7 +3,8 @@ MAINTAINER Nathan Walker <nathan@rylath.net>
 
 RUN apt-get update \
 	&& apt-get install -y postgresql-client \
-	&& apt-get install -y git-core
+	&& apt-get install -y git-core \
+	&& apt-get install -y vim
 
 ENV CATALINA_HOME /usr/local/tomcat
 ENV PATH $CATALINA_HOME/bin:$PATH
@@ -55,15 +56,16 @@ WORKDIR /
 RUN mkdir /usr/local/transitime
 RUN mkdir /usr/local/transitime/db
 RUN mkdir /usr/local/transitime/config
+RUN mkdir /usr/local/transitime/logs
 RUN mkdir /usr/local/transitimeTomcatConfig/
 
-# Deploy core. The work horse of the system
+# Deploy core. The work horse of transiTime.
 RUN mv /transitime-core/transitime/target/Core.jar /usr/local/transitime/transitime.jar
 
-# Deploy API which talks to core using RMI calls
+# Deploy API which talks to core using RMI calls.
 RUN mv /transitime-core/transitimeApi/target/api.war /usr/local/tomcat/webapps
 
-# Deploy webapp which is a UI based on the API
+# Deploy webapp which is a UI based on the API.
 RUN mv /transitime-core/transitimeWebapp/target/web.war /usr/local/tomcat/webapps
 
 RUN mv /transitime-core/transitime/target/classes/ddl_postgres*.sql /usr/local/transitime/db
@@ -71,15 +73,16 @@ RUN rm -rf /transitime-core
 RUN rm -rf ~/.m2/repository
 
 
+# Scripts required to start transitime. These are in the order they need to be run.
+ADD bin/check_db_up.sh check_db_up.sh
 ADD bin/create_tables.sh create_tables.sh
+ADD bin/import_gtfs.sh import_gtfs.sh
 ADD bin/create_api_key.sh create_api_key.sh
 ADD bin/add_webagency.sh add_webagency.sh
-ADD bin/check_db_up.sh check_db_up.sh
-
-ADD bin/import_gtfs.sh import_gtfs.sh
-ADD bin/connect_to_db.sh connect_to_db.sh
-
 ADD bin/start_transitime.sh start_transitime.sh
+
+# Handly utility to allow you connect directly to database
+ADD bin/connect_to_db.sh connect_to_db.sh
 
 RUN \
 	sed -i 's/\r//' *.sh &&\
