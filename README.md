@@ -8,7 +8,7 @@ Things to make transitime go:
 - sudo apt-get install git
 - git clone https://github.com/scrudden/transitime-docker.git
 - curl -sSL https://get.docker.com/ | sh  (i.e. install docker)
-- Configure Agency details in the go.sh script. Here you set the agency name, agency id (as in GTFS feed) and GTFS feed location
+- Configure agency details in the go.sh script. Here you set the agency name, agency id (as in GTFS feed) and GTFS feed location
 - ./go.sh
 
 The go script will build the transitime container (takes a long time), start the postgres db, create the tables,
