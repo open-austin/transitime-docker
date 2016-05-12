@@ -7,7 +7,6 @@ Things to make transitime go:
 - Ubuntu
 - sudo apt-get install git
 - git clone https://github.com/scrudden/transitime-docker.git
-- 
 - curl -sSL https://get.docker.com/ | sh  (i.e. install docker)
 - ./go.sh
 
