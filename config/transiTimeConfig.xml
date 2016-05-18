@@ -15,14 +15,22 @@
 	<agencyId>02</agencyId>
     </core>	
     <avl>
-        <!-- URL for GTFS realtime vechicle location stream -->
-        <gtfsRealtimeFeedURI>http://irishrailrealtime-gtfsnode.rhcloud.com/vehiclePositions</gtfsRealtimeFeedURI> 
-		<url>http://irishrailrealtime-gtfsnode.rhcloud.com/vehiclePositions</url>       
-        <minLongitude>-10.725</minLongitude>
+        <!-- URL for GTFS realtime vechicle location stream. Changed name in versions do use both for the moment. -->
+        <gtfsRealtimeFeedURI>GTFSRTVEHICLEPOSITIONS</gtfsRealtimeFeedURI> 		  
+		<url>GTFSRTVEHICLEPOSITIONS</url>		    
+        <!-- <minLongitude>-10.725</minLongitude>
         <maxLongitude>-5.35</maxLongitude>             
         <minLatitude>51.35</minLatitude>
-        <maxLatitude>55.45</maxLatitude>                
+        <maxLatitude>55.45</maxLatitude>
+         -->                
+        <maxLongitude>30.517681</maxLongitude>
+        <maxLatitude>-97.495917</maxLatitude>
+        
+        <minLongitude>30.145125</minLongitude>                    
+        <minLatitude>-98.072043</minLatitude>
+        
         <feedPollingRateSecs>60</feedPollingRateSecs>
+        
     </avl>   
     <db>        
         <dbName>AGENCYNAME</dbName>

@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+java -Dtransitime.db.dbName=transitime -Dtransitime.hibernate.configFile=/usr/local/transitime/config/hibernate.cfg.xml -Dtransitime.db.dbHost=$POSTGRES_PORT_5432_TCP_ADDR:$POSTGRES_PORT_5432_TCP_PORT -Dtransitime.db.dbUserName=postgres -Dtransitime.db.dbPassword=$PGPASSWORD -Dtransitime.db.dbType=postgresql -jar $TRANSITIMECORE/transitime/target/CreateWebAgency.jar $*

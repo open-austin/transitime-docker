@@ -1,18 +1,15 @@
 #!/usr/bin/env bash
-java \
-	-Dtransitime.db.dbName=$AGENCYNAME \
-	-Dtransitime.db.dbType=postgresql \
-	-Dtransitime.db.dbUserName=postgres \
-	-Dtransitime.db.dbPassword=$PGPASSWORD \
-	-Dtransitime.core.agencyId=$AGENCYID \
-	-Dtransitime.hibernate.configFile=/usr/local/transitime/config/hibernate.cfg.xml \
-	-Dhibernate.connection.url=jdbc:postgresql://$POSTGRES_PORT_5432_TCP_ADDR:$POSTGRES_PORT_5432_TCP_PORT/$AGENCYNAME \
-	-Dhibernate.connection.username=postgres \
-	-Dhibernate.connection.password=$PGPASSWORD \
-	-cp /usr/local/transitime/transitime.jar \
-	org.transitime.applications.GtfsFileProcessor \
-	-gtfsUrl $GTFSURL \
-	-maxTravelTimeSegmentLength 400
+
+# This is to substitute into config file the env values. 
+sed -i s#"POSTGRES_PORT_5432_TCP_ADDR"#"$POSTGRES_PORT_5432_TCP_ADDR"#g /usr/local/transitime/config/*
+sed -i s#"POSTGRES_PORT_5432_TCP_PORT"#"$POSTGRES_PORT_5432_TCP_PORT"#g /usr/local/transitime/config/*
+sed -i s#"PGPASSWORD"#"$PGPASSWORD"#g /usr/local/transitime/config/*
+sed -i s#"AGENCYNAME"#"$AGENCYNAME"#g /usr/local/transitime/config/*
+sed -i s#"GTFSRTVEHICLEPOSITIONS"#"$GTFSRTVEHICLEPOSITIONS"#g /usr/local/transitime/config/*
+
+cp /usr/local/transitime/config/transitime.properties /usr/local/transitimeTomcatConfig/transitime.properties
+
+java -Xmx1000M -Dtransitime.core.agencyId=$AGENCYID -Dtransitime.configFiles=/usr/local/transitime/config/transiTimeConfig.xml -Dtransitime.logging.dir=/usr/local/transitime/logs/ -Dlogback.configurationFile=$TRANSITIMECORE/transitime/src/main/resouces/logbackGtfs.xml -jar $TRANSITIMECORE/transitime/target/GtfsFileProcessor.jar -gtfsUrl $GTFS_URL -maxTravelTimeSegmentLength 400
 
 psql \
 	-h "$POSTGRES_PORT_5432_TCP_ADDR" \
