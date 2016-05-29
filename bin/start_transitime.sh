@@ -9,6 +9,14 @@ sed -i s#"GTFSRTVEHICLEPOSITIONS"#"$GTFSRTVEHICLEPOSITIONS"#g /usr/local/transit
 
 cp /usr/local/transitime/config/transitime.properties /usr/local/transitimeTomcatConfig/transitime.properties
 
+#set the API as an environment variable so we can set in JSP of template/includes.jsp in the transitime webapp
+export APIKEY=$(/get_api_key.sh)
+
+# make it so we can also access as a system property in the JSP
+export JAVA_OPTS="$JAVA_OPTS -Dtransitime.apikey=$(/get_api_key.sh)"
+
+service tomcat7 start
+
 java -Dtransitime.configFiles=/usr/local/transitime/config/transiTimeConfig.xml -Dtransitime.core.agencyId=$AGENCYID -Dtransitime.logging.dir=/usr/local/transitime/logs/ -jar $TRANSITIMECORE/transitime/target/Core.jar -configRev 0 /dev/null 2>&1
 
 

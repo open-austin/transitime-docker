@@ -6,7 +6,7 @@
     </modules>
     <autoBlockAssigner>
 		<autoAssignerEnabled>true</autoAssignerEnabled>
-		<ignoreAvlAssignments>true</ignoreAvlAssignments>
+		<ignoreAvlAssignments>false</ignoreAvlAssignments>
 		<allowableEarlySeconds>600</allowableEarlySeconds>
 		<allowableLateSeconds>600</allowableLateSeconds>
     </autoBlockAssigner>
@@ -23,13 +23,14 @@
         <minLatitude>51.35</minLatitude>
         <maxLatitude>55.45</maxLatitude>
          -->                
-        <maxLongitude>30.517681</maxLongitude>
-        <maxLatitude>-97.495917</maxLatitude>
         
-        <minLongitude>30.145125</minLongitude>                    
-        <minLatitude>-98.072043</minLatitude>
+        <minLatitude>30.145125</minLatitude>   
+        <maxLatitude>30.517681</maxLatitude>
         
-        <feedPollingRateSecs>60</feedPollingRateSecs>
+        <minLongitude>-98.072043</minLongitude>
+        <maxLongitude>-97.495917</maxLongitude>
+                                                 
+        <feedPollingRateSecs>120</feedPollingRateSecs>
         
     </avl>   
     <db>        

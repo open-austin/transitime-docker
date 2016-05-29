@@ -1,19 +1,12 @@
 #!/usr/bin/env bash
-java \
-        -Dtransitime.db.dbName=$AGENCYNAME \
-        -Dtransitime.db.dbType=postgresql \
-        -Dtransitime.db.dbUserName=postgres \
-        -Dtransitime.db.dbPassword=$PGPASSWORD \
-        -Dtransitime.core.agencyId=$AGENCYID \
-        -Dtransitime.hibernate.configFile=/usr/local/transitime/config/hibernate.cfg.xml \
-        -Dhibernate.connection.url=jdbc:postgresql://$POSTGRES_PORT_5432_TCP_ADDR:$POSTGRES_PORT_5432_TCP_PORT/$AGENCYNAME \
-        -Dhibernate.connection.username=postgres \
-        -Dhibernate.connection.password=$PGPASSWORD \
-	-cp /usr/local/transitime/transitime.jar \
-	org.transitime.applications.CreateAPIKey \
-	-d "foo" \
-	-e "nathan@rylath.net" \
-	-n "Nathan Walker" \
-	-p "123" \
-	-u "http://foo.bar.com"
 
+# This is to substitute into config file the env values
+sed -i s#"POSTGRES_PORT_5432_TCP_ADDR"#"$POSTGRES_PORT_5432_TCP_ADDR"#g /usr/local/transitime/config/*
+sed -i s#"POSTGRES_PORT_5432_TCP_PORT"#"$POSTGRES_PORT_5432_TCP_PORT"#g /usr/local/transitime/config/*
+sed -i s#"PGPASSWORD"#"$PGPASSWORD"#g /usr/local/transitime/config/*
+sed -i s#"AGENCYNAME"#"$AGENCYNAME"#g /usr/local/transitime/config/*
+sed -i s#"GTFSRTVEHICLEPOSITIONS"#"$GTFSRTVEHICLEPOSITIONS"#g /usr/local/transitime/config/*
+
+cp /usr/local/transitime/config/transitime.properties /usr/local/transitimeTomcatConfig/transitime.properties
+
+java -jar /usr/local/transitime/CreateAPIKey.jar -c "/usr/local/transitime/config/transiTimeConfig.xml" -d "foo" -e "og.crudden@gmail.com" -n "Sean Og Crudden" -p "123456" -u "http://www.transitime.org"
