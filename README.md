@@ -30,6 +30,5 @@ docker-machine ip [machine name]
 docker-machine ip default
 ```
 
-If you want to run an instance of the transitime app, you can call:
-./run_to_bash.sh
+
 
