@@ -10,7 +10,7 @@ Things to make transitime go:
 - ./go.sh
 
 The go script will build the transitime container (takes a long time), start the postgres db, create the tables,
-push the gtfs data into the db, create a default API key (f18a8240) and then start the api service and web user interface service. 
+push the gtfs data into the db, create an API key and then start the api service and web user interface service. 
 
 To view web interface
 ```
