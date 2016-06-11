@@ -1,14 +1,14 @@
 export PGPASSWORD=transitime
-export AGENCYNAME=CAPMETRO
+export AGENCYNAME=GOHART
 export AGENCYID=1
-export GTFS_URL="https://data.texas.gov/download/r4v4-vz24/application/zip"
-export GTFSRTVEHICLEPOSITIONS="https://data.texas.gov/download/eiei-9rpf/application/octet-stream"
+export GTFS_URL="http://gohart.org/google/google_transit.zip"
+export GTFSRTVEHICLEPOSITIONS="http://realtime.prod.obahart.org:8088/vehicle-positions"
 
 docker stop $(docker ps -a -q)
 
 docker rm $(docker ps -a -q)
 
-docker build --no-cache -t transitime-server .
+docker build -t transitime-server .
 
 docker run --name transitime-db -e POSTGRES_PASSWORD=$PGPASSWORD -d postgres
 
