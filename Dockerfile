@@ -62,7 +62,8 @@ RUN git clone https://github.com/scrudden/core.git /transitime-core
 
 WORKDIR /transitime-core
 
-RUN git checkout kalman_predictions
+#RUN git checkout kalman_predictions
+RUN git checkout historical_predictions
 
 #RUN git checkout shade_build_upstream
 
@@ -73,7 +74,8 @@ RUN mkdir /usr/local/transitime
 RUN mkdir /usr/local/transitime/db
 RUN mkdir /usr/local/transitime/config
 RUN mkdir /usr/local/transitime/logs
-RUN mkdir /usr/local/transitimeTomcatConfig/
+RUN mkdir /usr/local/transitime/cache
+
 
 # Deploy core. The work horse of transiTime.
 RUN cp /transitime-core/transitime/target/*.jar /usr/local/transitime/
