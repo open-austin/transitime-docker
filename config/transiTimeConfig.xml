@@ -2,7 +2,7 @@
 <transitime>
     <modules>
         <!-- <optionalModulesList>org.transitime.core.schedBasedPreds.SchedBasedPredsModule;org.transitime.avl.GtfsRealtimeModule</optionalModulesList> -->                            
-        <optionalModulesList>org.transitime.avl.GtfsRealtimeModule</optionalModulesList>
+        <optionalModulesList>org.transitime.avl.GtfsRealtimeModule;org.transitime.core.predAccuracy.PredictionAccuracyModule</optionalModulesList>
     </modules>
     <autoBlockAssigner>
 		<autoAssignerEnabled>true</autoAssignerEnabled>
@@ -11,7 +11,7 @@
 		<allowableLateSeconds>600</allowableLateSeconds>
     </autoBlockAssigner>
     <core>
-    	<predictionGeneratorClass>org.transitime.core.predictiongenerator.average.HistoricalAveragePredictionGeneratorImpl</predictionGeneratorClass>
+    	<predictionGeneratorClass>org.transitime.core.predictiongenerator.kalman.KalmanPredictionGeneratorImpl</predictionGeneratorClass>
     	<maxDistanceFromSegment>30000</maxDistanceFromSegment>	
     </core>	
     <avl>
@@ -35,7 +35,8 @@
                                                  
         <feedPollingRateSecs>120</feedPollingRateSecs>
         
-    </avl>   
+    </avl>  
+
     <db>        
         <dbName>AGENCYNAME</dbName>
         <dbHost>POSTGRES_PORT_5432_TCP_ADDR:POSTGRES_PORT_5432_TCP_PORT</dbHost>
@@ -46,5 +47,7 @@
     <hibernate>
         <configFile>/usr/local/transitime/config/hibernate.cfg.xml</configFile>        
     </hibernate>
-    
+    <gtfs>
+    	<routeIdFilterRegEx>1</routeIdFilterRegEx>
+    </gtfs>    
 </transitime>
