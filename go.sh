@@ -1,8 +1,9 @@
 export PGPASSWORD=transitime
-export AGENCYNAME=GOHART
-export AGENCYID=1
-export GTFS_URL="http://gohart.org/google/google_transit.zip"
-export GTFSRTVEHICLEPOSITIONS="http://realtime.prod.obahart.org:8088/vehicle-positions"
+export AGENCYNAME=ATLANTA_SC
+export AGENCYID=atlanta-sc
+export GTFS_URL="https://transitfeeds.com/p/city-of-atlanta/424/latest/download"
+export GTFSRTVEHICLEPOSITIONS=""
+
 
 docker stop $(docker ps -a -q)
 
