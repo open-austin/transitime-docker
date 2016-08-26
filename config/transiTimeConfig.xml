@@ -34,7 +34,9 @@
          -->
                                                  
         <feedPollingRateSecs>20</feedPollingRateSecs>
-        
+         <nextbus>
+        	<agencyNameForFeed>atlanta-sc</agencyNameForFeed>
+        </nextbus>
     </avl>  
 
     <db>        
@@ -44,6 +46,7 @@
         <dbUserName>postgres</dbUserName>
         <dbPassword>PGPASSWORD</dbPassword>
     </db>     
+    <web><mapTileUrl>http://tile.openstreetmap.org/{z}/{x}/{y}.png</mapTileUrl></web>
     <hibernate>
         <configFile>/usr/local/transitime/config/hibernate.cfg.xml</configFile>        
     </hibernate>
