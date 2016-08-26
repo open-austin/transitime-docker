@@ -34,9 +34,6 @@
          -->
                                                  
         <feedPollingRateSecs>20</feedPollingRateSecs>
-        <nextbus>
-        	<agencyNameForFeed>atlanta-sc</agencyNameForFeed>
-        </nextbus>
         
     </avl>  
 
@@ -50,7 +47,4 @@
     <hibernate>
         <configFile>/usr/local/transitime/config/hibernate.cfg.xml</configFile>        
     </hibernate>
-    <gtfs>
-    	<routeIdFilterRegEx>1</routeIdFilterRegEx>
-    </gtfs>    
 </transitime>

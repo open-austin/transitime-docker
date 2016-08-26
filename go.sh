@@ -1,7 +1,7 @@
 export PGPASSWORD=transitime
 export AGENCYNAME=atlanta-sc
-export AGENCYID=1
-export GTFS_URL="https://transitfeeds.com/p/city-of-atlanta/424/latest/download"
+export AGENCYID=ASC
+export GTFS_URL="https://dl.dropboxusercontent.com/u/107527881/google_transit_atlantastreetcar.zip"
 export GTFSRTVEHICLEPOSITIONS=""
 
 
