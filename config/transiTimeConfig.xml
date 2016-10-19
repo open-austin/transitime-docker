@@ -15,6 +15,7 @@
     	<predictionGeneratorClass>org.transitime.core.predictiongenerator.average.HistoricalAveragePredictionGeneratorImpl</predictionGeneratorClass>
     	<maxDistanceFromSegment>30000</maxDistanceFromSegment>	
     </core>	
+	<predAccuracy><maxPredTimeMinutes>30<maxPredTimeMinutes/></predAccuracy>
     <avl>
         <!-- URL for GTFS realtime vechicle location stream. Changed name in versions do use both for the moment.
         <gtfsRealtimeFeedURI>GTFSRTVEHICLEPOSITIONS</gtfsRealtimeFeedURI> 		  
