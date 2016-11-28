@@ -5,9 +5,9 @@ export GTFS_URL="https://dl.dropboxusercontent.com/u/107527881/google_transit_at
 export GTFSRTVEHICLEPOSITIONS=""
 
 
-docker stop $(docker ps -a -q)
+#docker stop $(docker ps -a -q)
 
-docker rm $(docker ps -a -q)
+#docker rm $(docker ps -a -q)
 
 docker build --no-cache -t transitime-server .
 
