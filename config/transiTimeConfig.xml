@@ -1,49 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<transitime>
-    <modules>
+   <modules>
         <!-- <optionalModulesList>org.transitime.core.schedBasedPreds.SchedBasedPredsModule;org.transitime.avl.GtfsRealtimeModule</optionalModulesList> -->                            
         <optionalModulesList>org.transitime.avl.NextBusAvlModule;org.transitime.core.predAccuracy.PredictionAccuracyModule</optionalModulesList>
     </modules>
- <holding>
-     	<controlStops>4560595:6</controlStops>
-    </holding>  
-    <autoBlockAssigner>
+    <holding>
+     	<controlStops>4560595:11</controlStops>
+    </holding>     
+    
+    <autoBlockAssigner>    
 		<autoAssignerEnabled>true</autoAssignerEnabled>
 		<ignoreAvlAssignments>false</ignoreAvlAssignments>
-		<allowableEarlySeconds>600</allowableEarlySeconds>
+		<allowableEarlySeconds>600</allowableEarlySeconds> 
 		<allowableLateSeconds>600</allowableLateSeconds>
     </autoBlockAssigner>
     <core>
     	<!--<predictionGeneratorClass>org.transitime.core.predictiongenerator.kalman.KalmanPredictionGeneratorImpl</predictionGeneratorClass>-->
-    	<predictionGeneratorClass>org.transitime.core.predictiongenerator.average.HistoricalAveragePredictionGeneratorImpl</predictionGeneratorClass>
-    	<maxDistanceFromSegment>30000</maxDistanceFromSegment>	
+    	<predictionGeneratorClass>org.transitime.core.predictiongenerator.average.frequency.HistoricalAveragePredictionGeneratorImpl</predictionGeneratorClass>
+    	<headwayGeneratorClass>org.transitime.core.headwaygenerator.LastArrivalsHeadwayGenerator</headwayGeneratorClass>
+    	<maxDistanceFromSegment>100</maxDistanceFromSegment>	
+    	<storeTravelTimeStopPathPredictions>true</storeTravelTimeStopPathPredictions>
+    	<!-- This setting allow more than one vehicle assigned to the same block. This should be set to true for scheduled services and false for frequency based services. -->
+    	<exclusiveBlockAssignments>false</exclusiveBlockAssignments>
+    	<maxPredictionsTimeSecs>4800</maxPredictionsTimeSecs>
+    	<beforeStopDistance>25</beforeStopDistance>
+    	<afterStopDistance>25</afterStopDistance>
+    	<layoverDistance>25</layoverDistance>
     </core>	
 	<predAccuracy><maxPredTimeMinutes>30</maxPredTimeMinutes></predAccuracy>
-    <avl>
-        <!-- URL for GTFS realtime vechicle location stream. Changed name in versions do use both for the moment.
-        <gtfsRealtimeFeedURI>GTFSRTVEHICLEPOSITIONS</gtfsRealtimeFeedURI> 		  
-		<url>GTFSRTVEHICLEPOSITIONS</url>		     -->
-		<!--  These are the values used for Irish Rail. -->
-        <!-- <minLongitude>-10.725</minLongitude>
-        <maxLongitude>-5.35</maxLongitude>             
-        <minLatitude>51.35</minLatitude>
-        <maxLatitude>55.45</maxLatitude>
-         -->                
-        <!--  defaults are for north america so only need this if we are not using data from there. -->
-        <!--  These are the values used for CAPMETRO in Austin, Texas. -->
-        <!-- <minLatitude>30.145125</minLatitude>   
-        <maxLatitude>30.517681</maxLatitude>
-        
-        <minLongitude>-98.072043</minLongitude>
-        <maxLongitude>-97.495917</maxLongitude>
-         -->
-                                                 
-        <feedPollingRateSecs>20</feedPollingRateSecs>
+    <avl>                                                     
+        <feedPollingRateSecs>10</feedPollingRateSecs>
          <nextbus>
         	<agencyNameForFeed>atlanta-sc</agencyNameForFeed>
         </nextbus>
     </avl>  
-
+    <cache>
+    	<daysPopulateHistoricalCache>3</daysPopulateHistoricalCache>
+    </cache>        
     <db>        
         <dbName>AGENCYNAME</dbName>
         <dbHost>POSTGRES_PORT_5432_TCP_ADDR:POSTGRES_PORT_5432_TCP_PORT</dbHost>
@@ -51,11 +42,11 @@
         <dbUserName>postgres</dbUserName>
         <dbPassword>PGPASSWORD</dbPassword>
     </db>
-<prediction>
+ 	<prediction>
     	<returnArrivalPredictionForEndOfTrip>true</returnArrivalPredictionForEndOfTrip>
-    </prediction>     
-    <web><mapTileUrl>http://tile.openstreetmap.org/{z}/{x}/{y}.png</mapTileUrl></web>
+    </prediction>
     <hibernate>
-        <configFile>/usr/local/transitime/config/hibernate.cfg.xml</configFile>        
+        <configFile>C:/cygwin64/home/SeanOg/workspace/transitime-historical/core/transitimeWebapp/src/main/resources/postgres_hibernate.cfg.xml</configFile>        
     </hibernate>
+     <web><mapTileUrl>http://tile.openstreetmap.org/{z}/{x}/{y}.png</mapTileUrl></web>
 </transitime>

@@ -1,7 +1,7 @@
 echo "export PGPASSWORD=transitime" >> ~/.bashrc
-echo "export AGENCYNAME=CAPMETRO" >> ~/.bashrc
-echo "export AGENCYID=1" >> ~/.bashrc
-echo "export GTFS_URL=\"https://data.texas.gov/download/r4v4-vz24/application/zip\"" >> ~/.bashrc
-echo "export GTFSRTVEHICLEPOSITIONS=\"https://data.texas.gov/download/eiei-9rpf/application/octet-stream\"" >> ~/.bashrc 
+echo "export AGENCYNAME=atlanta-sc" >> ~/.bashrc
+echo "export AGENCYID=ASC" >> ~/.bashrc
+echo "export GTFS_URL=\"https://dl.dropboxusercontent.com/u/107527881/gtfs_latest_schedule_asc.zip\"" >> ~/.bashrc
+echo "export GTFSRTVEHICLEPOSITIONS=\"\"" >> ~/.bashrc 
 
 source ~/.bashrc
