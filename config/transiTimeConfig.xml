@@ -4,9 +4,9 @@
         <!-- <optionalModulesList>org.transitime.core.schedBasedPreds.SchedBasedPredsModule;org.transitime.avl.GtfsRealtimeModule</optionalModulesList> -->                            
         <optionalModulesList>org.transitime.avl.NextBusAvlModule;org.transitime.core.predAccuracy.PredictionAccuracyModule</optionalModulesList>
     </modules>
-    <holding>
-     	<controlStops>4560595:11</controlStops>
-    </holding>     
+     <holding>
+     	<controlStops>4560595:6</controlStops>
+    </holding>        
     
     <autoBlockAssigner>    
 		<autoAssignerEnabled>true</autoAssignerEnabled>
@@ -26,6 +26,7 @@
     	<beforeStopDistance>25</beforeStopDistance>
     	<afterStopDistance>25</afterStopDistance>
     	<layoverDistance>25</layoverDistance>
+    	<allowableNumberOfBadMatches>5</allowableNumberOfBadMatches>
     </core>	
 	<predAccuracy><maxPredTimeMinutes>30</maxPredTimeMinutes></predAccuracy>
     <avl>                                                     
