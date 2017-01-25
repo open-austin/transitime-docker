@@ -21,7 +21,9 @@ echo JAVA_OPTS $JAVA_OPTS
 
 /usr/local/tomcat/bin/startup.sh
 
-java -Dtransitime.configFiles=/usr/local/transitime/config/transiTimeConfig.xml -Dtransitime.core.agencyId=$AGENCYID -Dtransitime.logging.dir=/usr/local/transitime/logs/ -jar $TRANSITIMECORE/transitime/target/Core.jar -configRev 0 /dev/null 2>&1
+nohup java -Dtransitime.configFiles=/usr/local/transitime/config/transiTimeConfig.xml -Dtransitime.core.agencyId=$AGENCYID -Dtransitime.logging.dir=/usr/local/transitime/logs/ -jar $TRANSITIMECORE/transitime/target/Core.jar -configRev 0 /dev/null 2>&1 &
+
+tail -f /dev/null
 
 
 
